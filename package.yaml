@@ -25,5 +25,8 @@ library:
   other-modules: []
   ghc-options: -Wall
   when:
-  - condition: ! impl(ghcjs)
-    source-dirs: src
+    - condition: '!impl(ghcjs)'
+      source-dirs: src
+      dependencies:
+        - ghcjs-base-stub == 0.2.0.0
+        - text >= 1.2
