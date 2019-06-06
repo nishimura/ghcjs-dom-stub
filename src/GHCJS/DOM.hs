@@ -25,11 +25,19 @@ import           JavaScript.Web.AnimationFrame (AnimationFrameHandle,
                                                 waitForAnimationFrame)
 
 import           GHCJS.DOM.Types
+import           GHCJS.Foreign                 (jsNull)
 
-foreign import javascript unsafe "$r = window"
-  ghcjs_currentWindow :: IO (Nullable Window)
-foreign import javascript unsafe "$r = document"
-  ghcjs_currentDocument :: IO (Nullable Document)
+
+
+-- foreign import javascript unsafe "$r = window"
+--   ghcjs_currentWindow :: IO (Nullable Window)
+ghcjs_currentWindow :: IO (Nullable Window)
+ghcjs_currentWindow = return (Nullable jsNull)
+
+-- foreign import javascript unsafe "$r = document"
+--   ghcjs_currentDocument :: IO (Nullable Document)
+ghcjs_currentDocument :: IO (Nullable Document)
+ghcjs_currentDocument = return (Nullable jsNull)
 
 currentWindow :: MonadDOM m => m (Maybe Window)
 currentWindow = liftDOM $ nullableToMaybe <$> ghcjs_currentWindow
