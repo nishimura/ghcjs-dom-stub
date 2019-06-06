@@ -989,6 +989,9 @@ type HasCallStack = (() :: Constraint)
 #endif
 
 
+instance Show JSVal where
+  show _ = "JSVVal"
+
 
 -- | Identifies a JavaScript execution context.
 --   When using GHCJS this is just '()' since their is only one context.
@@ -1049,7 +1052,7 @@ maybeJSNullOrUndefined r | isNull r || isUndefined r = Nothing
 maybeJSNullOrUndefined r = Just r
 
 -- | Like `Nullabble` but `maybeToOptional` converts `Nothing` to `jsUndefined`.
-newtype Optional a = Optional JSVal
+newtype Optional a = Optional JSVal deriving (Show)
 
 maybeToOptional :: PToJSVal a => Maybe a -> Optional a
 maybeToOptional Nothing  = Optional jsUndefined
@@ -1058,7 +1061,7 @@ maybeToOptional (Just x) = Optional (pToJSVal x)
 
 propagateGError = id
 
-newtype GType = GType JSVal
+newtype GType = GType JSVal deriving(Show)
 
 --foreign import javascript unsafe "$r = $1.name;" gTypeToString :: GType -> JSString
 gTypeToString :: GType -> JSString
@@ -1122,7 +1125,7 @@ uncheckedCastTo constructor = constructor . coerce
 isA :: IsGObject o => o -> GType -> Bool
 isA obj = typeInstanceIsA (unGObject $ toGObject obj)
 
-newtype GObject = GObject { unGObject :: JSVal }
+newtype GObject = GObject { unGObject :: JSVal } deriving (Show)
 noGObject :: Maybe GObject
 noGObject = Nothing
 {-# INLINE noGObject #-}
@@ -1248,7 +1251,7 @@ type IsCSSOMString s = (ToDOMString s, FromDOMString s)
 type IsUSVString s = (ToDOMString s, FromDOMString s)
 type IsByteString s = (ToDOMString s, FromDOMString s)
 
-newtype RawTypedArray = RawTypedArray { unRawTypedArray :: JSVal }
+newtype RawTypedArray = RawTypedArray { unRawTypedArray :: JSVal } deriving (Show)
 noRawTypedArray :: Maybe RawTypedArray
 noRawTypedArray = Nothing
 {-# INLINE noRawTypedArray #-}
@@ -1274,7 +1277,7 @@ class (FromJSVal o, ToJSVal o, PFromJSVal o, PToJSVal o, Coercible o JSVal) => I
 toRawTypedArray :: IsRawTypedArray o => o -> RawTypedArray
 toRawTypedArray = RawTypedArray . coerce
 
-newtype Function = Function { unFunction :: JSVal }
+newtype Function = Function { unFunction :: JSVal } deriving (Show)
 noFunction :: Maybe Function
 noFunction = Nothing
 {-# INLINE noFunction #-}
@@ -2520,7 +2523,7 @@ instance IsFloat32List Float32List
 instance IsFloat32List [GLfloat]
 instance IsFloat32List Float32Array
 
-newtype HTMLCollectionOrElement = HTMLCollectionOrElement { unHTMLCollectionOrElement :: JSVal }
+newtype HTMLCollectionOrElement = HTMLCollectionOrElement { unHTMLCollectionOrElement :: JSVal } deriving (Show)
 
 instance PToJSVal HTMLCollectionOrElement where
   pToJSVal = unHTMLCollectionOrElement
@@ -9046,7 +9049,7 @@ gTypeDeviceProximityEventInit = gtNull
 --     * "GHCJS.DOM.DocumentAndElementEventHandlers"
 --
 -- <https://developer.mozilla.org/en-US/docs/Web/API/Document Mozilla Document documentation>
-newtype Document = Document { unDocument :: JSVal }
+newtype Document = Document { unDocument :: JSVal } deriving (Show)
 
 instance Eq (Document) where
   (Document a) == (Document b) = js_eq a b
@@ -9688,7 +9691,7 @@ gTypeEcdsaParams = gtNull
 --     * "GHCJS.DOM.Animatable"
 --
 -- <https://developer.mozilla.org/en-US/docs/Web/API/Element Mozilla Element documentation>
-newtype Element = Element { unElement :: JSVal }
+newtype Element = Element { unElement :: JSVal } deriving (Show)
 
 instance Eq (Element) where
   (Element a) == (Element b) = js_eq a b
@@ -11719,7 +11722,7 @@ gTypeHTMLCanvasElement = gtNull
 -- | Functions for this inteface are in "GHCJS.DOM.HTMLCollection".
 --
 -- <https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection Mozilla HTMLCollection documentation>
-newtype HTMLCollection = HTMLCollection { unHTMLCollection :: JSVal }
+newtype HTMLCollection = HTMLCollection { unHTMLCollection :: JSVal } deriving (Show)
 
 instance Eq (HTMLCollection) where
   (HTMLCollection a) == (HTMLCollection b) = js_eq a b
@@ -19156,7 +19159,7 @@ gTypeNavigatorUserMediaError = gtNull
 --     * "GHCJS.DOM.EventTarget"
 --
 -- <https://developer.mozilla.org/en-US/docs/Web/API/Node Mozilla Node documentation>
-newtype Node = Node { unNode :: JSVal }
+newtype Node = Node { unNode :: JSVal } deriving (Show)
 
 instance Eq (Node) where
   (Node a) == (Node b) = js_eq a b
