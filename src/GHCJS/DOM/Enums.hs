@@ -5,7 +5,7 @@
 {-# LANGUAGE ConstraintKinds          #-}
 {-# LANGUAGE ImplicitParams           #-}
 {-# LANGUAGE KindSignatures           #-}
-module GHCJS.DOM.JSFFI.Generated.Enums
+module GHCJS.DOM.Enums
        (KeyType(..), PToJSVal, ToJSVal, PFromJSVal, FromJSVal,
         js_KeyTypePublic, js_KeyTypePrivate, js_KeyTypeSecret,
         CryptoKeyUsage(..), js_CryptoKeyUsageEncrypt,

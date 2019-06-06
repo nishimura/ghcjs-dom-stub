@@ -85,7 +85,7 @@ import Data.Traversable (mapM)
 import GHCJS.DOM.Types
 import Control.Applicative ((<$>))
 import GHCJS.DOM.EventTargetClosures (EventName, unsafeEventName, unsafeEventNameAsync)
-import GHCJS.DOM.JSFFI.Generated.Enums
+import GHCJS.DOM.Enums
 
 import qualified Data.JSString                   as JSString
 

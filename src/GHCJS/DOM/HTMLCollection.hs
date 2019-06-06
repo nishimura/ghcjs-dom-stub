@@ -25,7 +25,7 @@ import Data.Traversable (mapM)
 import GHCJS.DOM.Types
 import Control.Applicative ((<$>))
 import GHCJS.DOM.EventTargetClosures (EventName, unsafeEventName, unsafeEventNameAsync)
-import GHCJS.DOM.JSFFI.Generated.Enums
+import GHCJS.DOM.Enums
  
 -- foreign import javascript unsafe "$1[$2]" js_item ::
 --         HTMLCollection -> Word -> IO (Nullable Element)
