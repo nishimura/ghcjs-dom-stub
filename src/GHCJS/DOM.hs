@@ -1,5 +1,6 @@
 module GHCJS.DOM (
-  currentWindow
+  module GHCJS.DOM.Types
+, currentWindow
 , currentWindowUnchecked
 , currentDocument
 , currentDocumentUnchecked
