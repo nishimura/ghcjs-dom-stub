@@ -1,5 +1,5 @@
 module GHCJS.DOM (
-  module GHCJS.DOM.Types
+  module Types
 , currentWindow
 , currentWindowUnchecked
 , currentDocument
@@ -25,9 +25,8 @@ import           JavaScript.Web.AnimationFrame (AnimationFrameHandle,
                                                 inAnimationFrame,
                                                 waitForAnimationFrame)
 
-import           GHCJS.DOM.Types
+import           GHCJS.DOM.Types               as Types
 import           GHCJS.Foreign                 (jsNull)
-
 
 
 -- foreign import javascript unsafe "$r = window"
